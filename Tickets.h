@@ -39,7 +39,7 @@ private:
 	Ticket *ticketArray;				// Pointer to array of tickets
 	unsigned int ticketArrayCapacity;	// Number of tickets the array currently has space for
 	unsigned int ticketArraySize;		// Number of tickets added to the array
-	const int arrayinc = 5;
+	static const int arrayinc = 5;
 };
 
 #endif /* TICKETS_H_ */

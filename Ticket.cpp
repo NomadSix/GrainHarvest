@@ -31,12 +31,18 @@ Ticket::Ticket()
 	tareWeight = 0;
 	timestamp = time(NULL);
 	//my compiler doesnt have nullptr
-	sample = 0;
+	sample = NULL;
 }
 
 Ticket::~Ticket()
 {
-	//delete sample;
+	if (sample == NULL)
+		delete sample;
+}
+
+Ticket::Ticket(const Ticket &obj)
+{
+	sample = obj.sample;
 }
 
 // Accessor to return sample

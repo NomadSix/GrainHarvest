@@ -41,18 +41,15 @@ string readString(istream& in, string output)
 // Return list of tickets (prompt user for tickets, adding each to list of tickets)
 void Input::inputTickets(Tickets& tickets)
 {
-	int i = 1;
 	while (true) {
 		Ticket curTicket;
-		cout << "\nTicket number " << i << " (alphanumeric): ";
+		cout << "\nTicket number " << tickets.size() + 1 << " (alphanumeric): ";
 		string number = readString(cin, "");
 		//Checks if the user inputed anything
 		if (number.length() == 0) break;
 		//Gets the input for the Current Ticket
 		int grossWeight = readInt(cin, "Gross Weight (lbs): ");
 		double tareWeight = readDouble(cin, "Tare Weight (lbs): ");
-		//double moistureLevel = readDouble(cin, "Moisture Weight (%): ");
-		//double foreignMaterial = readDouble(cin, "Foreign Material (%): ");
 
 		Wheat * wheat = new Wheat;
 		Soybean * soy = new Soybean;
@@ -85,7 +82,6 @@ void Input::inputTickets(Tickets& tickets)
 		}
 		if (count == 0) {
 			tickets.add(curTicket);
-			i += 1;
 		}
 	}
 }

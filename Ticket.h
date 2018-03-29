@@ -27,6 +27,9 @@ public:
 	//  gross weight (lbs), tare weight (lbs), and grain sample
 	Ticket(const std::string& number, const int grossWeight, const int tareWeight, Grain& sample);
 
+	// Copy Constructor
+	Ticket(const Ticket &obj);
+
 	~Ticket();
 
 	// create a copy of the Ticket parameter
