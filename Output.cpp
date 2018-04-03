@@ -13,8 +13,8 @@ using namespace std;
 // Output list of tickets
 void Output::outputTickets(const Tickets& tickets)
 {
-	for (int i = 1; i <= tickets.size(); i++) {
-		cout << tickets[tickets.size() - i].toString() << "\n";
+	for (int i = 0; i < tickets.size(); i++) {
+		cout << tickets[i].toString() << "\n";
 	}
 }
 

@@ -25,15 +25,12 @@ public:
 
 	// Constructor allowing caller to specify a ticket's number,
 	//  gross weight (lbs), tare weight (lbs), and grain sample
-	Ticket(const std::string& number, const int grossWeight, const int tareWeight, Grain& sample);
+	Ticket(const std::string& number, const int grossWeight, const int tareWeight, Grain *sample);
 
 	// Copy Constructor
 	Ticket(const Ticket &obj);
 
 	~Ticket();
-
-	// create a copy of the Ticket parameter
-	Ticket copy();
 
 	// Accessor to return sample
 	Grain * getSample() const;
@@ -66,10 +63,12 @@ public:
 	double getNetBushels() const;
 
 	// Returns a string representing ticket's attributes (in form of a receipt)
-	std::string toString();
+	std::string toString() const;
 
 	// Overloaded equality operator ==
 	bool operator ==(const Ticket& ticket) const;
+
+	Ticket& operator =(const Ticket& ticket);
 
 	// Overloaded insertion operator <<
 	friend std::ostream& operator <<(std::ostream& os, const Ticket& tickets);

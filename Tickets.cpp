@@ -7,13 +7,18 @@
 #include <string.h>
 #include "Tickets.h"
 
+namespace {
+	const int ARRAY_INC = 5;
+}
+
+
 // Copy constructor
 Tickets::Tickets(const Tickets& tickets)
 {
 	ticketArrayCapacity = tickets.ticketArrayCapacity;
-	ticketArraySize = tickets.size();
-	for (unsigned int i = 0; i < tickets.ticketArrayCapacity; i++)
-	{
+	ticketArraySize = tickets.ticketArraySize;
+	ticketArray = new Ticket[ticketArrayCapacity];
+	for (unsigned int i = 0; i < tickets.ticketArraySize; i++) {
 		ticketArray[i] = tickets.ticketArray[i];
 	}
 }
@@ -21,9 +26,9 @@ Tickets::Tickets(const Tickets& tickets)
 // Constructor default
 Tickets::Tickets()
 {
-	ticketArray = {};
 	ticketArrayCapacity = 0;
 	ticketArraySize = 0;
+	ticketArray = new Ticket[0];
 }
 
 // Destructor
@@ -35,23 +40,19 @@ Tickets::~Tickets()
 // Add a ticket to the array of tickets
 void Tickets::add(const Ticket& ticket)
 {
-	if (ticketArrayCapacity == size()) {
+	if (ticketArrayCapacity == ticketArraySize) {
 		// make space
-		if (ticketArrayCapacity != 0) {
-			ticketArrayCapacity += arrayinc;
-		} else {
-			ticketArrayCapacity = 1;
-		}
+		ticketArrayCapacity += ARRAY_INC;
 
 		// allocate and move
 		Ticket* temp = ticketArray;
 		ticketArray = new Ticket[ticketArrayCapacity];
-		ticketArray[0] = ticket;
 		for (unsigned int i = 0; i < ticketArraySize; i++) {
-			ticketArray[i + 1] = temp[i];
+			ticketArray[i] = temp[i];
 		}
+		delete[] temp;
 	}
-	ticketArraySize++;
+	ticketArray[ticketArraySize++] = ticket;
 }
 
 // Return size of array of tickets (number of tickets in array)
@@ -63,14 +64,16 @@ int Tickets::size() const
 // Overloaded assignment operator =
 const Tickets& Tickets::operator =(const Tickets& tickets)
 {
-//	ticketArray = tickets.ticketArray;
+	if (this != &tickets)
+		return *this;
+	delete[] ticketArray;
 	ticketArrayCapacity = tickets.ticketArrayCapacity;
-	ticketArraySize = tickets.size();
-	for (unsigned int i = 0; i < tickets.ticketArrayCapacity; i++)
-	{
+	ticketArraySize = tickets.ticketArraySize;
+	ticketArray = new Ticket[ticketArrayCapacity];
+	for (unsigned int i = 0; i < tickets.ticketArraySize; i++) {
 		ticketArray[i] = tickets.ticketArray[i];
 	}
-
+	return *this;
 }
 
 // Overloaded array operator []

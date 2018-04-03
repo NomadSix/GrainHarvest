@@ -14,40 +14,46 @@
 #include <string>
 
 // Constructor allowing caller to specify sample's moisture level (%) and foreign material (%)
-Ticket::Ticket(const std::string& num, const int grossW, const int tareW, Grain& sam)
+Ticket::Ticket(const std::string& num, const int grossW, const int tareW, Grain *sam)
 {
+	timestamp = time(NULL);
 	number = num;
 	grossWeight = grossW;
 	tareWeight = tareW;
-	sample = &sam;
-	timestamp = time(NULL);
+	if (sam) {
+		sample = sam->clone();
+	} else {
+		sample = NULL;
+	}
 }
 
 // Constructor default
 Ticket::Ticket()
 {
-	number = "";
+	timestamp = time(NULL);
 	grossWeight = 0;
 	tareWeight = 0;
-	timestamp = time(NULL);
 	//my compiler doesnt have nullptr
 	sample = NULL;
 }
 
 Ticket::~Ticket()
 {
-	if (sample == NULL)
+	if (sample)
 		delete sample;
 }
 
 Ticket::Ticket(const Ticket &obj)
 {
 	sample = obj.sample;
+	//
 }
 
 // Accessor to return sample
 Grain * Ticket::getSample() const {
-	return sample->clone();
+	if (!sample)
+			return NULL;
+	return sample->clone;
 }
 
 // Accessor to return time stamp
@@ -114,34 +120,33 @@ double Ticket::getNetBushels() const
 }
 
 // Returns a string representing ticket's attributes (in form of a receipt)
-std::string Ticket::toString()
+std::string Ticket::toString() const
 {
 	int WIDTH = 10;
 	char outTime[20];
     std::ostringstream os;
-    Ticket item = *this;
     //double moistureDoc = item.sample.getMoistureLevel() ? item.sample.getIdealMoistureLevel()
 
 
     os << std::fixed << std::setprecision(2);
-    os << item.sample->getType() << " Ticket " << item.getNumber() << " – ";
+    os << sample->toString() << " Ticket " << getNumber() << " – ";
     if (strftime(outTime, sizeof(outTime), "%D %T", localtime(&timestamp))) {
     	os << outTime << ":\n";
     }
     os.width(WIDTH);
-    os << std::right << item.getGrossWeight() << std::left << " Gross Weight" << "\n";
+    os << std::right << getGrossWeight() << std::left << " Gross Weight" << "\n";
     os.width(WIDTH);
-    os << std::right << item.getTareWeight() << std::left << " Tare Weight" << "\n";
+    os << std::right << getTareWeight() << std::left << " Tare Weight" << "\n";
     os.width(WIDTH);
-    os << std::right << item.getNetWeight() << std::left << " Net Weight" << "\n\n";
+    os << std::right << getNetWeight() << std::left << " Net Weight" << "\n\n";
     os.width(WIDTH);
-    os << std::right << item.getGrossBushels() << std::left << " Gross Bushels" << "\n";
+    os << std::right << getGrossBushels() << std::left << " Gross Bushels" << "\n";
     os.width(WIDTH);
-    os << std::right << item.getMoistureLevelDockage() << std::left << " Moisture Level (" << item.sample->getMoistureLevel() << "%)" << "\n";
+    os << std::right << getMoistureLevelDockage() << std::left << " Moisture Level (" << sample->getMoistureLevel() << "%)" << "\n";
     os.width(WIDTH);
-    os << std::right << item.getForeignMaterialDockage() << std::left << " Foreign Material (" << item.sample->getForeignMaterial() << "%)" << "\n";
+    os << std::right << getForeignMaterialDockage() << std::left << " Foreign Material (" << sample->getForeignMaterial() << "%)" << "\n";
     os.width(WIDTH);
-    os << std::right << item.getNetBushels() << std::left << " Net Bushels" << "\n";
+    os << std::right << getNetBushels() << std::left << " Net Bushels" << "\n";
 
     return os.str();
 }
@@ -151,6 +156,8 @@ bool Ticket::operator ==(const Ticket& ticket) const
 {
 	return number == ticket.number;
 }
+
+
 
 // Overloaded insertion operator <<
 std::ostream& operator <<(std::ostream& os, Ticket& tickets)

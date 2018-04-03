@@ -13,9 +13,6 @@
  */
 class Grain
 {
-protected:
-	virtual Grain* cloneCst() const = 0;
-
 public:
 	// Constructor default
 	Grain();
@@ -23,23 +20,22 @@ public:
 	// Constructor allowing caller to specify sample's moisture level (%) and foreign material (%)
 	Grain(double moistureLevel, double foreignMaterial);
 
-	// copy constructor
-	Grain* clone() const
-	{
-		return cloneCst();
-	}
-
 	// Destructor
 	virtual ~Grain();
 
+	//copys object
+	virtual Grain* clone();
+
 	//return a string representing the calling object’s grain type
-	virtual std::string getType() = 0;
+	virtual std::string getType() const = 0;
 
 	// Accessor to return grain's average test weight (lbs/bushel)
-	virtual double getAverageTestWeight() = 0;
+	virtual const double getAverageTestWeight() const = 0;
 
 	// Accessor to return grain's ideal moisture level (percent)
-	virtual double getIdealMoistureLevel() = 0;
+	virtual const double getIdealMoistureLevel() const = 0;
+
+	std::string toString();
 
 	// Accessor to return sample's moisture level (percent)
 	double getMoistureLevel() const;
@@ -48,10 +44,10 @@ public:
 	double getForeignMaterial() const;
 
 	// setter to set the sample's moisture level
-	void setMoistureLevel(double);
+	void setMoistureLevel(double); //dont use
 
 	// setter to set the foreignMaterial
-	void setForeignMaterial(double);
+	void setForeignMaterial(double); //dont use
 
 private:
 	// Member variables

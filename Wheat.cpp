@@ -4,27 +4,37 @@
 // Assignment Number: 5
 
 #include "Wheat.h"
-#include <iostream>
 
 using namespace std;
 
-Wheat::Wheat() : Grain(0, 0)
-{
+namespace {
+	const double AVERAGE_TEST_WEIGHT = 60.0;
+	const double IDEAL_MOISTURE_LEVEL = 13.5;
 }
 
-Wheat::Wheat(double moistureLevel, double foreignMaterial) : Grain(moistureLevel, foreignMaterial)
-{
+Wheat::Wheat() : Grain() {}
 
-}
+Wheat::Wheat(double moistureLevel, double foreignMaterial) : Grain(moistureLevel, foreignMaterial) {}
 
-Wheat::~Wheat()
-{
-	// TODO Auto-generated destructor stub
-}
+Wheat::~Wheat() {}
 
 //return a string representing the calling object’s grain type
-std::string Wheat::getType()
+std::string Wheat::getType() const
 {
 	return "Wheat";
 }
 
+const double Wheat::getAverageTestWeight() const
+{
+	return AVERAGE_TEST_WEIGHT;
+}
+
+const double Wheat::getIdealMoistureLevel() const
+{
+	return IDEAL_MOISTURE_LEVEL;
+}
+
+Wheat* Wheat::clone() const
+{
+	return new Wheat(*this);
+}

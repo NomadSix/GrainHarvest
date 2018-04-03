@@ -51,26 +51,19 @@ void Input::inputTickets(Tickets& tickets)
 		int grossWeight = readInt(cin, "Gross Weight (lbs): ");
 		double tareWeight = readDouble(cin, "Tare Weight (lbs): ");
 
-		Wheat * wheat = new Wheat;
-		Soybean * soy = new Soybean;
-		Milo * milo = new Milo;
+		Grain * sample;
 
 		double mL = readDouble(cin, "Moisture Weight (%): ");
 		double fM = readDouble(cin, "Foreign Material (%): ");
 		string grainType = readString(cin, "Grain type (w)heat, (s)oybean, (g)rain sorghum: ");
 		if (grainType == "w") {
-			wheat->setMoistureLevel(mL);
-			wheat->setForeignMaterial(fM);
-			curTicket = Ticket(number, grossWeight, tareWeight, *wheat);
+			sample = new Wheat();
 		} else if (grainType == "s") {
-			soy->setMoistureLevel(mL);
-			soy->setForeignMaterial(fM);
-			curTicket = Ticket(number, grossWeight, tareWeight, *soy);
+			sample = new Soybean(mL, fM);
 		} else {
-			milo->setMoistureLevel(mL);
-			milo->setForeignMaterial(fM);
-			curTicket = Ticket(number, grossWeight, tareWeight, *milo);
+			sample = new Milo(mL, fM);
 		}
+		curTicket = Ticket(number, grossWeight, tareWeight, sample);
 
 		// check for duplicate tickets
 		int count = 0;

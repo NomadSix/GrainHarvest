@@ -10,36 +10,21 @@
 
 class Milo: public Grain
 {
-
 public:
 	Milo();
 	Milo(double, double);
 	virtual ~Milo();
 
-	Grain* cloneCst() const
-	{
-		return new Milo(*this);
-	}
-
 	//return a string representing the calling object’s grain type
-	virtual std::string getType();
+	virtual std::string getType() const;
 
 	// Accessor to return grain's average test weight (lbs/bushel)
-	virtual double getAverageTestWeight()
-	{
-		return 56.0;
-	}
+	virtual const double getAverageTestWeight() const;
 
 	// Accessor to return grain's ideal moisture level (percent)
-	virtual double getIdealMoistureLevel()
-	{
-		return 13.0;
-	}
+	virtual const double getIdealMoistureLevel() const;
 
-	Milo* clone() const
-	{
-		return static_cast<Milo*>(cloneCst());
-	}
+	Milo* clone() const;
 };
 
 #endif /* MILO_H_ */

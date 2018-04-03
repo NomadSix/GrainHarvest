@@ -15,30 +15,14 @@ public:
 	Soybean(double, double);
 	virtual ~Soybean();
 
-	Grain* cloneCst() const
-	{
-		return new Soybean(*this);
-	}
-
 	//return a string representing the calling object’s grain type
-	virtual std::string getType();
+	virtual std::string getType() const;
 
 	// Accessor to return grain's average test weight (lbs/bushel)
-	virtual double getAverageTestWeight()
-	{
-		return 60.0;
-	}
+	virtual const double getAverageTestWeight() const;
 
 	// Accessor to return grain's ideal moisture level (percent)
-	virtual double getIdealMoistureLevel()
-	{
-		return 13.0;
-	}
-
-	Soybean* clone() const
-	{
-		return static_cast<Soybean*>(cloneCst());
-	}
+	virtual const double getIdealMoistureLevel() const;
 };
 
 #endif /* SOYBEAN_H_ */

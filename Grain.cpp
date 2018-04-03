@@ -7,20 +7,17 @@
 #include "Grain.h"
 
 // Constructor allowing caller to specify sample's moisture level (%) and foreign material (%)
-Grain::Grain(double mLevel, double fMaterial)
-	: moistureLevel(mLevel), foreignMaterial(fMaterial)
-{
-}
+Grain::Grain(double mLevel, double fMaterial) : moistureLevel(mLevel), foreignMaterial(fMaterial) {}
 
 // Constructor default
-Grain::Grain() : Grain(0, 0)
-{
-}
+Grain::Grain() : Grain(0, 0) {}
 
 // Destructor
-Grain::~Grain()
+Grain::~Grain() {}
+
+std::string Grain::toString()
 {
-	//delete this;
+	return getType();
 }
 
 // Accessor to return sample's moisture level (percent)

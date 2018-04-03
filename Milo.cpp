@@ -8,27 +8,37 @@
 
 using namespace std;
 
-// no arg constructor
-Milo::Milo() : Grain(0, 0)
-{
-	// TODO Auto-generated constructor stub
-
+namespace {
+	const double AVERAGE_TEST_WEIGHT = 56.0;
+	const double IDEAL_MOISTURE_LEVEL = 13.0;
 }
+
+// no arg constructor
+Milo::Milo() : Grain(){}
 
 // 2 arg constructor
-Milo::Milo(double moistureLevel, double foreignMaterial) : Grain(moistureLevel, foreignMaterial)
-{
-	// TODO Auto-generated constructor stub
+Milo::Milo(double moistureLevel, double foreignMaterial) : Grain(moistureLevel, foreignMaterial){}
 
-}
-
-Milo::~Milo()
-{
-	// TODO Auto-generated destructor stub
-}
+// deconstructor
+Milo::~Milo(){}
 
 // returns the type of grain as a string
-std::string Milo::getType()
+std::string Milo::getType() const
 {
 	return "Grain Sorghum";
+}
+
+const double Milo::getAverageTestWeight() const
+{
+	return AVERAGE_TEST_WEIGHT;
+}
+
+const double Milo::getIdealMoistureLevel() const
+{
+	return IDEAL_MOISTURE_LEVEL;
+}
+
+Milo* Milo::clone() const
+{
+	return new Milo(*this);
 }
