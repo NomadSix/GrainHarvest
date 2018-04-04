@@ -28,7 +28,7 @@ void Output::outputSummary(const Tickets& tickets) {
 		gross += item.getGrossBushels();
 		net += (item.getGrossBushels() - item.getMoistureLevelDockage() - item.getForeignMaterialDockage());
 	}
-	//cout << allTickets[0].getNumber() << "\n";
+
 	cout << "Harvest Summary Totals\n";
     cout.width(10); cout << right << gross << left << " Gross Bushels" << endl;
     cout.width(10); cout << right << net << left << " Net Bushels" << endl;

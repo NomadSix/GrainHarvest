@@ -11,6 +11,7 @@ using namespace std;
 namespace {
 	const double AVERAGE_TEST_WEIGHT = 56.0;
 	const double IDEAL_MOISTURE_LEVEL = 13.0;
+	const std::string GRAIN_TYPE = "Grain Sorghum";
 }
 
 // no arg constructor
@@ -23,9 +24,9 @@ Milo::Milo(double moistureLevel, double foreignMaterial) : Grain(moistureLevel, 
 Milo::~Milo(){}
 
 // returns the type of grain as a string
-std::string Milo::getType() const
+const std::string Milo::getType() const
 {
-	return "Grain Sorghum";
+	return GRAIN_TYPE;
 }
 
 const double Milo::getAverageTestWeight() const

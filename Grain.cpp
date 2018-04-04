@@ -15,6 +15,7 @@ Grain::Grain() : Grain(0, 0) {}
 // Destructor
 Grain::~Grain() {}
 
+// Returns the type of grain as a string
 std::string Grain::toString() const
 {
 	return getType();

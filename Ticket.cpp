@@ -136,8 +136,6 @@ std::string Ticket::toString() const
 	int WIDTH = 10;
 	char outTime[20];
     std::ostringstream os;
-    //double moistureDoc = item.sample.getMoistureLevel() ? item.sample.getIdealMoistureLevel()
-
 
     os << std::fixed << std::setprecision(2);
     os << sample->toString() << " Ticket " << getNumber() << " – ";
@@ -179,11 +177,7 @@ Ticket& Ticket::operator =(const Ticket& ticket)
 	tareWeight = ticket.tareWeight;
 	if (sample)
 		delete sample;
-	if (ticket.sample) {
-		sample = ticket.sample->clone(); // TODO: CRASHING HERE SEGMENTATION (SIGSEGV)
-	} else {
-		sample = NULL;
-	}
+	sample = ticket.getSample();
 	return *this;
 }
 

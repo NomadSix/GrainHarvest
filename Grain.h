@@ -26,7 +26,7 @@ public:
 	virtual Grain* clone() const = 0;
 
 	//return a string representing the calling object’s grain type
-	virtual std::string getType() const = 0;
+	virtual const std::string getType() const = 0;
 
 	// Accessor to return grain's average test weight (lbs/bushel)
 	virtual const double getAverageTestWeight() const = 0;

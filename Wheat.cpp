@@ -10,6 +10,7 @@ using namespace std;
 namespace {
 	const double AVERAGE_TEST_WEIGHT = 60.0;
 	const double IDEAL_MOISTURE_LEVEL = 13.5;
+	const std::string GRAIN_TYPE = "Wheat";
 }
 
 Wheat::Wheat() : Grain() {}
@@ -19,9 +20,9 @@ Wheat::Wheat(double moistureLevel, double foreignMaterial) : Grain(moistureLevel
 Wheat::~Wheat() {}
 
 //return a string representing the calling object’s grain type
-std::string Wheat::getType() const
+const std::string Wheat::getType() const
 {
-	return "Wheat";
+	return GRAIN_TYPE;
 }
 
 const double Wheat::getAverageTestWeight() const

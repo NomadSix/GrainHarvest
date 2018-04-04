@@ -9,34 +9,15 @@
 
 using namespace std;
 
-//Function (readInt, readDouble, and readString) are used for inline functions input calls
-int readInt(istream& in, string output)
-{
-    int i;
-    cout << output;
-    cin >> i;
-    cin.ignore(256, '\n');
-    return i;
-}
 
 //Function (readInt, readDouble, and readString) are used for inline functions input calls
-double readDouble(istream& in, string output)
-{
-    double i;
-    cout << output;
-    cin >> i;
-    cin.ignore(256, '\n');
-    return i;
-}
+int readInt(istream& in, string output);
 
 //Function (readInt, readDouble, and readString) are used for inline functions input calls
-string readString(istream& in, string output)
-{
-    string i;
-    cout << output;
-    getline(in, i);
-    return i;
-}
+double readDouble(istream& in, string output);
+
+//Function (readInt, readDouble, and readString) are used for inline functions input calls
+string readString(istream& in, string output);
 
 // Return list of tickets (prompt user for tickets, adding each to list of tickets)
 void Input::inputTickets(Tickets& tickets)
@@ -64,7 +45,7 @@ void Input::inputTickets(Tickets& tickets)
 			sample = new Milo(mL, fM);
 		}
 		curTicket = Ticket(number, grossWeight, tareWeight, sample);
-
+		delete sample;
 		// check for duplicate tickets
 		int count = 0;
 		for (int i = 0; i < tickets.size(); i++) {
@@ -78,3 +59,30 @@ void Input::inputTickets(Tickets& tickets)
 		}
 	}
 }
+
+int readInt(istream& in, string output)
+{
+    int i;
+    cout << output;
+    cin >> i;
+    cin.ignore(256, '\n');
+    return i;
+}
+
+double readDouble(istream& in, string output)
+{
+    double i;
+    cout << output;
+    cin >> i;
+    cin.ignore(256, '\n');
+    return i;
+}
+
+string readString(istream& in, string output)
+{
+    string i;
+    cout << output;
+    getline(in, i);
+    return i;
+}
+

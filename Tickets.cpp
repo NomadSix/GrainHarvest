@@ -41,16 +41,20 @@ Tickets::~Tickets()
 void Tickets::add(const Ticket& ticket)
 {
 	if (ticketArrayCapacity == ticketArraySize) {
+		// allocate and move
+		Ticket* temp = ticketArray;
+
 		// make space
 		ticketArrayCapacity += ARRAY_INC;
 
-		// allocate and move
-		Ticket* temp = ticketArray;
+		// allocated dynamic array
 		ticketArray = new Ticket[ticketArrayCapacity];
 		for (unsigned int i = 0; i < ticketArraySize; i++) {
 			ticketArray[i] = temp[i];
 		}
-		//delete[] temp;
+
+		// deallocate temp array
+		delete[] temp;
 	}
 	ticketArray[ticketArraySize++] = ticket;
 }

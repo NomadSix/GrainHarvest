@@ -10,6 +10,7 @@ using namespace std;
 namespace {
 	const double AVERAGE_TEST_WEIGHT = 60.0;
 	const double IDEAL_MOISTURE_LEVEL = 13.0;
+	const std::string GRAIN_TYPE = "Soybean";
 }
 
 Soybean::Soybean() : Grain() {}
@@ -19,9 +20,9 @@ Soybean::Soybean(double moistureLevel, double foreignMaterial) : Grain(moistureL
 Soybean::~Soybean() {}
 
 //return a string representing the calling object’s grain type
-std::string Soybean::getType() const
+const std::string Soybean::getType() const
 {
-	return "Soybean";
+	return GRAIN_TYPE;
 }
 
 const double Soybean::getAverageTestWeight() const
