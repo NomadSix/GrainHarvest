@@ -17,14 +17,6 @@ class Input {
 public:
 	// Return list of tickets (prompt user for tickets, adding each to list of tickets)
 	static void inputTickets(Tickets& tickets);
-
-	enum Type
-	{
-		WHEAT,
-		SOYBEAN,
-		MILO
-	};
-
 private:
 	// Default constructor (use private to prevent creation)
 	Input();

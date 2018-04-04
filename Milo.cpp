@@ -38,7 +38,7 @@ const double Milo::getIdealMoistureLevel() const
 	return IDEAL_MOISTURE_LEVEL;
 }
 
-Milo* Milo::clone() const
+Grain* Milo::clone() const
 {
 	return new Milo(*this);
 }

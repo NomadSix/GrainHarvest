@@ -50,7 +50,7 @@ void Tickets::add(const Ticket& ticket)
 		for (unsigned int i = 0; i < ticketArraySize; i++) {
 			ticketArray[i] = temp[i];
 		}
-		delete[] temp;
+		//delete[] temp;
 	}
 	ticketArray[ticketArraySize++] = ticket;
 }

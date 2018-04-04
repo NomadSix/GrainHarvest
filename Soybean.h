@@ -15,6 +15,8 @@ public:
 	Soybean(double, double);
 	virtual ~Soybean();
 
+	virtual Grain* clone() const;
+
 	//return a string representing the calling object’s grain type
 	virtual std::string getType() const;
 

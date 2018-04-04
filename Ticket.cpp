@@ -14,7 +14,7 @@
 #include <string>
 
 // Constructor allowing caller to specify sample's moisture level (%) and foreign material (%)
-Ticket::Ticket(const std::string& num, const int grossW, const int tareW, Grain *sam)
+Ticket::Ticket(const std::string& num, const int grossW, const int tareW, Grain* sam)
 {
 	timestamp = time(NULL);
 	number = num;
@@ -33,27 +33,32 @@ Ticket::Ticket()
 	timestamp = time(NULL);
 	grossWeight = 0;
 	tareWeight = 0;
-	//my compiler doesnt have nullptr
 	sample = NULL;
 }
 
+// DeConstructor
 Ticket::~Ticket()
 {
 	if (sample)
 		delete sample;
 }
 
+// copy constructor
 Ticket::Ticket(const Ticket &obj)
 {
-	sample = obj.sample;
-	//
+	timestamp = time(NULL);
+	number = obj.number;
+	grossWeight = obj.grossWeight;
+	tareWeight = obj.tareWeight;
+	sample = obj.getSample();
 }
 
 // Accessor to return sample
-Grain * Ticket::getSample() const {
+Grain* Ticket::getSample() const
+{
 	if (!sample)
 			return NULL;
-	return sample->clone;
+	return sample->clone();
 }
 
 // Accessor to return time stamp
@@ -89,6 +94,8 @@ int Ticket::getNetWeight() const
 // Function to return gross bushels
 double Ticket::getGrossBushels() const
 {
+	if (!sample)
+		return 0.0;
 	return getNetWeight() / sample->getAverageTestWeight();
 }
 
@@ -96,6 +103,8 @@ double Ticket::getGrossBushels() const
 double Ticket::getMoistureLevelDockage() const
 {
     //foreignDoc = foreignMaterial * grossBushels;
+    if (!sample)
+    	return 0;
     double moistureDoc = 0.0;
     if (sample->getMoistureLevel() > sample->getIdealMoistureLevel()) {
     	moistureDoc = sample->getMoistureLevel() - sample->getIdealMoistureLevel();
@@ -109,6 +118,8 @@ double Ticket::getMoistureLevelDockage() const
 // Function to return foreign material dockage
 double Ticket::getForeignMaterialDockage() const
 {
+	if (!sample)
+		return 0.0;
 	return sample->getForeignMaterial() * getGrossBushels() / 100;
 }
 
@@ -157,7 +168,24 @@ bool Ticket::operator ==(const Ticket& ticket) const
 	return number == ticket.number;
 }
 
-
+// Overloaded equal operator =
+Ticket& Ticket::operator =(const Ticket& ticket)
+{
+	if (this == &ticket)
+		return *this;
+	timestamp = ticket.timestamp;
+	number = ticket.number;
+	grossWeight = ticket.grossWeight;
+	tareWeight = ticket.tareWeight;
+	if (sample)
+		delete sample;
+	if (ticket.sample) {
+		sample = ticket.sample->clone(); // TODO: CRASHING HERE SEGMENTATION (SIGSEGV)
+	} else {
+		sample = NULL;
+	}
+	return *this;
+}
 
 // Overloaded insertion operator <<
 std::ostream& operator <<(std::ostream& os, Ticket& tickets)

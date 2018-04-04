@@ -34,7 +34,7 @@ const double Wheat::getIdealMoistureLevel() const
 	return IDEAL_MOISTURE_LEVEL;
 }
 
-Wheat* Wheat::clone() const
+Grain* Wheat::clone() const
 {
 	return new Wheat(*this);
 }

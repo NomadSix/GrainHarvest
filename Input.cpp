@@ -57,7 +57,7 @@ void Input::inputTickets(Tickets& tickets)
 		double fM = readDouble(cin, "Foreign Material (%): ");
 		string grainType = readString(cin, "Grain type (w)heat, (s)oybean, (g)rain sorghum: ");
 		if (grainType == "w") {
-			sample = new Wheat();
+			sample = new Wheat(mL, fM);
 		} else if (grainType == "s") {
 			sample = new Soybean(mL, fM);
 		} else {

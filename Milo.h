@@ -15,6 +15,8 @@ public:
 	Milo(double, double);
 	virtual ~Milo();
 
+	virtual Grain* clone() const;
+
 	//return a string representing the calling object’s grain type
 	virtual std::string getType() const;
 
@@ -23,8 +25,6 @@ public:
 
 	// Accessor to return grain's ideal moisture level (percent)
 	virtual const double getIdealMoistureLevel() const;
-
-	Milo* clone() const;
 };
 
 #endif /* MILO_H_ */

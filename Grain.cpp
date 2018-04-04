@@ -15,7 +15,7 @@ Grain::Grain() : Grain(0, 0) {}
 // Destructor
 Grain::~Grain() {}
 
-std::string Grain::toString()
+std::string Grain::toString() const
 {
 	return getType();
 }
@@ -30,16 +30,4 @@ double Grain::getMoistureLevel() const
 double Grain::getForeignMaterial() const
 {
 	return foreignMaterial;
-}
-
-// setter to set the sample's moisture level
-void Grain::setMoistureLevel(double mL)
-{
-	moistureLevel = mL;
-}
-
-// setter to set the foreignMaterial
-void Grain::setForeignMaterial(double fM)
-{
-	foreignMaterial = fM;
 }

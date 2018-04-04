@@ -34,7 +34,7 @@ const double Soybean::getIdealMoistureLevel() const
 	return IDEAL_MOISTURE_LEVEL;
 }
 
-Grain* Grain::clone() const
+Grain* Soybean::clone() const
 {
 	return new Soybean(*this);
 }
